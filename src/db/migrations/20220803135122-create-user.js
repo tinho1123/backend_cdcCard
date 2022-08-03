@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,13 +9,40 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        
+      },
+      cpfId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: 'cpf_id',
+        references: {
+          model: 'cpfs',
+          key: 'id' 
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE', 
+      },
+      departmentId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: 'department_id',
+        references: {
+          model: 'departments',
+          key: 'id' 
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE', 
       },
       salary: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      birth_date: {
-        type: Sequelize.DATE
+      birthDate: {
+        type: Sequelize.STRING,
+        field: 'birth_date',
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
