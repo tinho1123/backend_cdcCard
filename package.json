@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/server.js",
+    "db:start": "npx sequelize db:create",
+    "db:migration": "npx sequelize db:migrate",
+    "start": "npm run db:start && npm run db:migration && node ./src/server.js",
     "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
@@ -15,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.21.3"
   },
   "devDependencies": {
