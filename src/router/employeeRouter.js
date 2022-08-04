@@ -5,7 +5,7 @@ const route = express.Router();
 const controllers = require('../controllers/employeeControllers')
 
 // Criar funcionário
-route.post('/create', controllers.createEmployee)
+route.post('/', controllers.createEmployee)
 
 // Pegar todos os funcionários
 
@@ -17,6 +17,14 @@ route.get('/:id', controllers.getOneEmployee)
 
 // Editar funcionário
 
+// Editar departamento
+route.put('/department/:id', controllers.updateEmployeeDepartment)
+
+// Editar salário
+route.put('/salary/:id', controllers.updateEmployeeSalary)
+
 // Excluir funcionário
+
+route.delete('/:id', controllers.deleteEmployee)
 
 module.exports = route;

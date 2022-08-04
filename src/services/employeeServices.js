@@ -55,8 +55,68 @@ const getOneEmployee = async (id) => {
     return GetEmployee;
 }
 
+const updateEmployeeDepartment = async (id, department) => {
+    const GetEmployee = await Employee.findByPk(id, {
+        include: [{
+            model: Cpf,
+            as: "CPF",
+        }, {
+            model: Department,
+            as: "Department"
+        }]
+    });
+
+    if (!GetEmployee) {
+        return new Error('Employee not found')
+    }
+
+    GetEmployee.Department.department = department;
+
+    await GetEmployee.Department.save();
+
+    return GetEmployee;
+}
+
+const updateEmployeeSalary = async (id, salary) => {
+    const GetEmployee = await Employee.findByPk(id, {
+        include: [{
+            model: Cpf,
+            as: "CPF",
+        }, {
+            model: Department,
+            as: "Department"
+        }]
+    });
+
+    if (!GetEmployee) {
+        return new Error('Employee not found')
+    }
+
+    GetEmployee.salary = salary;
+
+    await GetEmployee.save();
+
+    return GetEmployee;
+}
+
+const deleteEmployee = async (id) => {
+    const getEmployee = await Employee.findOne({ where: { id }});
+    await Cpf.destroy({ where: { id: getEmployee.cpf_id }})
+    await Department.destroy({ where: { id: getEmployee.department_id }})
+    await getEmployee.destroy()
+
+    if (!getEmployee) {
+        return new Error('Employee not found')
+    }
+
+    return { deleted: true };
+}
+
 module.exports = {
     createEmployee,
     getAllEmployee,
     getOneEmployee,
+    updateEmployeeDepartment,
+    updateEmployeeSalary,
+    deleteEmployee
 }

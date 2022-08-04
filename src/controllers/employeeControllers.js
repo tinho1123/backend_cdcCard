@@ -31,9 +31,47 @@ const getOneEmployee = async (req, res) => {
     res.status(200).json(getEmployee)
 }
 
+const updateEmployeeDepartment = async (req, res) => {
+    const { id } = req.params;
+    const { department } = req.body;
+    const updateEmployee = await services.updateEmployeeDepartment(id, department)
+
+    if (updateEmployee instanceof Error) {
+        return res.status(400).json({ message: updateEmployee.message })
+    }
+
+    res.status(200).json(updateEmployee)
+}
+
+const updateEmployeeSalary = async (req, res) => {
+    const { id } = req.params;
+    const { salary } = req.body;
+    const updateEmployee = await services.updateEmployeeSalary(id, salary)
+
+    if (updateEmployee instanceof Error) {
+        return res.status(400).json({ message: updateEmployee.message })
+    }
+
+    res.status(200).json(updateEmployee)
+}
+
+const deleteEmployee = async (req, res) => {
+    const { id } = req.params;
+    const deleteEmployee = await services.deleteEmployee(id);
+
+    if (deleteEmployee instanceof Error) {
+        return res.status(400).json({ message: deleteEmployee.message })
+    }
+
+    res.status(200).json(deleteEmployee)
+}
+
 
 module.exports = {
     createEmployee,
     getAllEmployee,
-    getOneEmployee
+    getOneEmployee,
+    updateEmployeeDepartment,
+    updateEmployeeSalary,
+    deleteEmployee
 }
