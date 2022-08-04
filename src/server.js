@@ -1,14 +1,15 @@
+require('dotenv/config');
 const express = require('express');
-require('dotenv/config')
 const cors = require('cors');
-const employeeRouter = require('./router/employeeRouter');
-
 const app = express();
 const PORT = process.env.API_PORT || 3001;
+
+const routes = require('./router')
 
 app.use(express.json());
 app.use(cors())
 
-app.use(employeeRouter)
+app.use('/api', routes);
+
 
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`))
