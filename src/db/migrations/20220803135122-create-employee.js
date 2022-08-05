@@ -40,7 +40,7 @@ module.exports = {
         allowNull: false,
       },
       birthDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         field: 'birth_date',
         allowNull: false,
       },

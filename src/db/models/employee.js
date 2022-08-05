@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     cpf_id: DataTypes.INTEGER,
     department_id: DataTypes.INTEGER,
     salary: DataTypes.STRING,
-    birth_date: DataTypes.DATE
+    birth_date: DataTypes.STRING
 
   }, {
     modelName: 'Employees',

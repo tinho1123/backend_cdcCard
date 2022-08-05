@@ -6,11 +6,10 @@ const createEmployee = async ({ name, birthDate, salary, cpf, department  }) => 
         return new Error('Registered Employee')
     }
     const createdCpf = await Cpf.create({ cpf })
-    const createdDepartment = await Department.create({ department })
     const createdEmployee = await Employee.create({ 
         name,
         cpf_id: createdCpf.id,
-        department_id: createdDepartment.id,
+        department_id: department,
         salary,
         birth_date: birthDate
     })

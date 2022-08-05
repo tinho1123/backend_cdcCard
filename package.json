@@ -8,8 +8,9 @@
     "db:start": "npx sequelize db:create",
     "db:migration": "npx sequelize db:migrate",
     "db:drop": "npx sequelize db:drop",
-    "start": "npm run db:drop && npm run db:start && npm run db:migration && node ./src/server.js",
-    "dev": "npm run db:drop && npm run db:start && npm run db:migration && nodemon ./src/server.js"
+    "db:seed": "npx sequelize db:seed:all",
+    "start": "npm run db:drop && npm run db:start && npm run db:migration && npm run db:seed && node ./src/server.js",
+    "dev": "npm run db:drop && npm run db:start && npm run db:migration && npm run db:seed && nodemon ./src/server.js"
   },
   "keywords": [],
   "author": "",
