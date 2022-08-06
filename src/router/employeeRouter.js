@@ -3,9 +3,18 @@ const express = require('express');
 const route = express.Router();
 
 const controllers = require('../controllers/employeeControllers')
+const middlewares = require('../middlewares/employeeMiddlewares');
 
 // Criar funcionário
-route.post('/', controllers.createEmployee)
+route.post(
+    '/',
+    middlewares.validateName,
+    middlewares.validateCpf,
+    middlewares.validateDepartment,
+    middlewares.validateSalary,
+    middlewares.validateBirthDate,
+    controllers.createEmployee
+    )
 
 // Pegar todos os funcionários
 
@@ -17,11 +26,16 @@ route.get('/:id', controllers.getOneEmployee)
 
 // Editar funcionário
 
-// Editar departamento
-route.put('/department/:id', controllers.updateEmployeeDepartment)
+route.put(
+    '/:id',
+    middlewares.validateName,
+    middlewares.validateCpf,
+    middlewares.validateDepartment,
+    middlewares.validateSalary,
+    middlewares.validateBirthDate, 
+    controllers.updateEmployee
+    )
 
-// Editar salário
-route.put('/salary/:id', controllers.updateEmployeeSalary)
 
 // Excluir funcionário
 

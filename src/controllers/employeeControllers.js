@@ -31,10 +31,10 @@ const getOneEmployee = async (req, res) => {
     res.status(200).json(getEmployee)
 }
 
-const updateEmployeeDepartment = async (req, res) => {
+const updateEmployee = async (req, res) => {
     const { id } = req.params;
-    const { department } = req.body;
-    const updateEmployee = await services.updateEmployeeDepartment(id, department)
+
+    const updateEmployee = await services.updateEmployee(id, req.body)
 
     if (updateEmployee instanceof Error) {
         return res.status(400).json({ message: updateEmployee.message })
@@ -43,17 +43,6 @@ const updateEmployeeDepartment = async (req, res) => {
     res.status(200).json(updateEmployee)
 }
 
-const updateEmployeeSalary = async (req, res) => {
-    const { id } = req.params;
-    const { salary } = req.body;
-    const updateEmployee = await services.updateEmployeeSalary(id, salary)
-
-    if (updateEmployee instanceof Error) {
-        return res.status(400).json({ message: updateEmployee.message })
-    }
-
-    res.status(200).json(updateEmployee)
-}
 
 const deleteEmployee = async (req, res) => {
     const { id } = req.params;
@@ -71,7 +60,6 @@ module.exports = {
     createEmployee,
     getAllEmployee,
     getOneEmployee,
-    updateEmployeeDepartment,
-    updateEmployeeSalary,
+    updateEmployee,
     deleteEmployee
 }
