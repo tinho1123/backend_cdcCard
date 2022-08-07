@@ -1,3 +1,4 @@
+const { cpf: Cpf } = require('../db/models')
 function validateName(req, res, next) {
     const { name } = req.body;
     if (!name) {
@@ -6,10 +7,19 @@ function validateName(req, res, next) {
     next()
 }
 
-function validateCpf(req, res, next) {
+async function validateCpf(req, res, next) {
     const { cpf } = req.body;
     if (!cpf) {
         return res.status(400).json({ message: 'cpf not found' })
+    }
+
+    const verifyCpfExists = await Cpf.findOne({
+        where: {
+            cpf: cpf
+        }
+    })
+    if (verifyCpfExists) {
+        return res.status(400).json({ message: 'cpf are exists in DB, cpf duplicates'})
     }
     next()
 }

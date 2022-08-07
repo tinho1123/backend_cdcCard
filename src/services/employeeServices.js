@@ -1,10 +1,7 @@
 const { employee: Employee, department: Department, cpf: Cpf } = require('../db/models')
 
 const createEmployee = async ({ name, birthDate, salary, cpf, department  }) => {
-    const findEmployee = await Employee.findOne({ where: { name: name }})
-    if (findEmployee) {
-        return new Error('Registered Employee')
-    }
+
     const createdCpf = await Cpf.create({ cpf })
     const createdEmployee = await Employee.create({ 
         name,
@@ -13,7 +10,17 @@ const createEmployee = async ({ name, birthDate, salary, cpf, department  }) => 
         salary,
         birth_date: birthDate
     })
-    return createdEmployee;
+
+    const getEmployee = await Employee.findByPk(createdEmployee.id, {
+        include: [{
+            model: Cpf,
+            as: "CPF",
+        }, {
+            model: Department,
+            as: "Department"
+        }]
+    });
+    return getEmployee;
 
 }
 
