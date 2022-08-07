@@ -78,7 +78,7 @@ const updateEmployee = async (id, { name, cpf, department, salary, birthDate }) 
     await GetEmployee.CPF.save();
     await GetEmployee.save();
 
-    return GetEmployee;
+    return { updated: true };
 }
 
 const deleteEmployee = async (id) => {
