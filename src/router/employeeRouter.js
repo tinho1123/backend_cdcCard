@@ -10,6 +10,7 @@ route.post(
     '/',
     middlewares.validateName,
     middlewares.validateCpf,
+    middlewares.validateCpfIfExists,
     middlewares.validateDepartment,
     middlewares.validateSalary,
     middlewares.validateBirthDate,

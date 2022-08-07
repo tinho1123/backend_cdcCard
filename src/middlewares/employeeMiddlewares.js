@@ -13,6 +13,12 @@ async function validateCpf(req, res, next) {
         return res.status(400).json({ message: 'cpf not found' })
     }
 
+    next()
+}
+
+
+async function validateCpfIfExists(req, res, next) {
+    const { cpf } = req.body
     const verifyCpfExists = await Cpf.findOne({
         where: {
             cpf: cpf
@@ -57,6 +63,7 @@ function validateBirthDate(req, res, next) {
 module.exports = {
     validateName,
     validateCpf,
+    validateCpfIfExists,
     validateDepartment,
     validateSalary,
     validateBirthDate

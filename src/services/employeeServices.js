@@ -62,15 +62,7 @@ const getOneEmployee = async (id) => {
 }
 
 const updateEmployee = async (id, { name, cpf, department, salary, birthDate }) => {
-    const GetEmployee = await Employee.findByPk(id, {
-        include: [{
-            model: Cpf,
-            as: "CPF",
-        }, {
-            model: Department,
-            as: "Department"
-        }]
-    });
+    let GetEmployee = await getOneEmployee(id)
 
     if (!GetEmployee) {
         return new Error('Employee not found')
@@ -85,7 +77,8 @@ const updateEmployee = async (id, { name, cpf, department, salary, birthDate }) 
     await GetEmployee.CPF.save();
     await GetEmployee.save();
 
-    return { updated: true };
+    GetEmployee = await getOneEmployee(id)
+    return GetEmployee;
 }
 
 const deleteEmployee = async (id) => {
