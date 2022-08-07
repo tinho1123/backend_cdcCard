@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "tests:unit": "mocha src/tests/unit/**/*.test.js  --exit -t 60000",
+    "tests:integration": "mocha src/tests/integration/*.test.js  --exit -t 60000",
+    "pretest": "cross-env NODE_ENV=test npx sequelize db:migrate",
+    "postest": "cross-env NODE_ENV=test npx sequelize db:migrate:undo:all",
+    "test": "npm run tests:integration && npm run tests:unit",
     "db:start": "npx sequelize db:create",
     "db:migration": "npx sequelize db:migrate",
     "db:drop": "npx sequelize db:drop",
@@ -23,7 +27,13 @@
     "sequelize": "^6.21.3"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "cross-env": "^7.0.3",
+    "jest": "^28.1.3",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "sinon": "^14.0.0",
+    "supertest": "^6.2.4"
   }
 }

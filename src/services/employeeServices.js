@@ -82,7 +82,7 @@ const updateEmployee = async (id, { name, cpf, department, salary, birthDate }) 
 }
 
 const deleteEmployee = async (id) => {
-    const getEmployee = await Employee.findOne({ where: { id }});
+    const getEmployee = await Employee.findByPk(id);
     await Cpf.destroy({ where: { id: getEmployee.cpf_id }})
     await getEmployee.destroy()
 
