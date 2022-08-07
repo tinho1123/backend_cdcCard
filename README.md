@@ -1,4 +1,4 @@
-# Processo Seletivo CDC
+# Processo Seletivo CDC Card
 
 ### É necessário seguir alguns passos a passos para poder baixar e executar o repositório
 
@@ -18,6 +18,8 @@ Para executar o projeto, depois de seguir todas as etapas anteriores, basta exec
 ## Realizando testes
 
 Os testes estão na pasta `/src/tests`, lá estão os testes isolados, na pasta `units` e de integração na pasta `integration`
+
+Para executar os testes, basta usar o comando `npm test`
 
 
 # Todos os caminhos adicionados e seus respectivos requests necessários
