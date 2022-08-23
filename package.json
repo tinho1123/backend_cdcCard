@@ -13,7 +13,7 @@
     "db:migration": "npx sequelize db:migrate",
     "db:drop": "npx sequelize db:drop",
     "db:seed": "npx sequelize db:seed:all",
-    "start": "npm run db:drop && npm run db:start && npm run db:migration && npm run db:seed && node ./src/server.js",
+    "start": "node ./src/server.js",
     "dev": "npm run db:drop && npm run db:start && npm run db:migration && npm run db:seed && nodemon ./src/server.js"
   },
   "keywords": [],
