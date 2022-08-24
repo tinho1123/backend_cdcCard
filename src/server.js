@@ -9,6 +9,8 @@ const routes = require('./router')
 app.use(express.json());
 app.use(cors())
 
+app.get('/', (req, res) => res.send(`<h1> Executando na porta: ${PORT} </h1>`))
+
 app.use('/api', routes);
 
 
